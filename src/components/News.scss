@@ -1,0 +1,10 @@
+.news {
+    background-color: yellow;
+    &__header {
+        font-weight: bold;
+    }
+}
+
+.noneDisp {
+    display: none;
+}

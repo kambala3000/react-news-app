@@ -1,4 +1,21 @@
-/node_modules/
-/temp/
-/.vscode/
-/.idea/
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+
+# testing
+/coverage
+
+# production
+/build
+/src/**/*.css
+
+# misc
+/.vscode
+/.idea
+.DS_Store
+.env
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
