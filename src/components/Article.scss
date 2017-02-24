@@ -1,0 +1,13 @@
+.article {
+    width: 600px;
+    padding: 0 10px;
+    margin: 0 auto 10px auto;
+    border: 1px solid black;
+    box-shadow: 1px 3px 25px -6px rgba(0, 0, 0, 0.75);
+    &__header {
+        color: #1574BD;
+    }
+    &__author {
+        color: green;
+    }
+}
