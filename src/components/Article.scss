@@ -1,13 +1,24 @@
 .article {
-    width: 600px;
-    padding: 0 10px;
+    width: 800px;
+    padding: 15px 10px;
     margin: 0 auto 10px auto;
     border: 1px solid black;
     box-shadow: 1px 3px 25px -6px rgba(0, 0, 0, 0.75);
     &__header {
+        margin: 0 0 5px 0;
+        font: 700 20px 'Open Sans', sans-serif;
         color: #1574BD;
     }
     &__author {
+        margin: 0 0 10px 0;
+        font: 600 16px 'Open Sans', sans-serif;
         color: green;
+    }
+    &__date {
+        
+    }
+    &__text {
+        font: 400 15px/1.4 'Open Sans', sans-serif;
+        text-align: justify;
     }
 }

@@ -1,12 +1,21 @@
+@font-face {
+    font-family: 'Old English';
+    src: url('../fonts/old-english.woff2') format('woff2'),
+    url('../fonts/old-english.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     background-color: #F7F7F7;
 }
 
 .app {
-    width: 700px;
+    width: 800px;
     margin: 0 auto;
     &__header {
-        font-size: 40px;
+        margin: 0 0 10px 0;
+        font: 700 40px/1.6 'Old English', sans-serif;
         text-align: center;
     }
 }

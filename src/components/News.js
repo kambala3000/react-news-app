@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import './News.css';
+
 import Article from './Article'
+import Control from './Control'
 
 class News extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            displayedNews: this.props.data
+            displayedNews: this.props.data,
+            show: false
         }
         this.handleSearch = this.handleSearch.bind(this);
+        this.updateNews = this.updateNews.bind(this);
     }
 
     handleSearch(e) {
@@ -18,12 +22,20 @@ class News extends Component {
             const searchValue = el.header.toLowerCase();
             return ~searchValue.indexOf(searchQuery);
         })
-        // console.log(e);
-        // console.log(newsArr);
+
         this.setState({
             displayedNews: newsArr
         })
     };
+
+    updateNews(item) {
+        let newsArr = this.props.data;
+        newsArr.unshift(item);
+        this.setState({
+            displayedNews: newsArr
+        })
+    };
+
 
     render() {
         const data = this.state.displayedNews;
@@ -34,12 +46,9 @@ class News extends Component {
         } else {
             newsTemp = <p>Новостей, к сожалению, нет.</p>
         }
-
         return (
             <div className='news'>
-              <p className='news__inp-wrap'>Search
-                <input type="text" className='news__input' onChange={ this.handleSearch } />
-              </p>
+              <Control handleSearch={ this.handleSearch } updateNews={ this.updateNews } />
               { newsTemp }
               <p className={ data.length > 0 ? 'news__counter' : 'noneDisp' }>
                 Всего новостей

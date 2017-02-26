@@ -3,13 +3,6 @@
 }
 
 .news {
-    &__inp-wrap {
-        display: flex;
-        justify-content: center;
-    }
-    &__input {
-        margin-left: 10px;
-    }
     &__counter {
         text-align: right;
     }

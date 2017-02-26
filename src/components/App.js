@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
+import './App.css';
+
 import News from './News';
 import testData from '../data/testData'
-import './App.css';
 
 class App extends Component {
   render() {
