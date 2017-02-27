@@ -2,8 +2,47 @@
     width: 800px;
     padding: 15px 10px;
     margin: 0 auto 10px auto;
-    border: 1px solid black;
-    box-shadow: 1px 3px 25px -6px rgba(0, 0, 0, 0.75);
+    position: relative;
+    border: 1px solid #999;
+    border-radius: 8px;
+    &__control {
+        height: 18px;
+        display: flex;
+        flex-direction: row;
+        position: absolute;
+        right: 20px;
+        top: 10px;
+    }
+    &__edit {
+        width: 18px;
+        height: 18px;
+        margin: 0 10px 0 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+    &__edit:hover {
+        fill: #fff;
+        background-color: #5cb85c;
+    }
+    &__remove {
+        width: 18px;
+        height: 18px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+    &__remove:hover {
+        fill: #fff;
+        background-color: #d9534f;
+    }
+    &__svg-icon {
+        height: 12px;
+    }
     &__header {
         margin: 0 0 5px 0;
         font: 700 20px 'Open Sans', sans-serif;
@@ -11,11 +50,13 @@
     }
     &__author {
         margin: 0 0 10px 0;
-        font: 600 16px 'Open Sans', sans-serif;
-        color: green;
+        font: 600 15px 'Open Sans', sans-serif;
+        color: #008000;
     }
     &__date {
-        
+        margin-left: 7px;
+        font: 400 14px 'Open Sans', sans-serif;
+        color: #808080;
     }
     &__text {
         font: 400 15px/1.4 'Open Sans', sans-serif;
