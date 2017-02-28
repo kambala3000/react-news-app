@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactPaginate from 'react-paginate';
 import './News.css';
 
 import Article from './Article'
@@ -11,7 +12,9 @@ class News extends Component {
         this.state = {
             displayedNews: this.props.data,
             showForm: false,
-            editedItem: false
+            editedItem: false,
+            currentPage: 1,
+            offset: 0
         }
         this.handleSearch = this.handleSearch.bind(this);
         this.resetStorage = this.resetStorage.bind(this);
@@ -19,6 +22,7 @@ class News extends Component {
         this.editItem = this.editItem.bind(this);
         this.removeItem = this.removeItem.bind(this);
         this.updateState = this.updateState.bind(this);
+        this.handlePageClick = this.handlePageClick.bind(this);
     }
 
     handleSearch(e) {
@@ -78,24 +82,43 @@ class News extends Component {
         this.setState(obj);
     };
 
+    handlePageClick(e) {
+        this.setState({
+            currentPage: e.selected,
+            offset: e.selected * this.props.perPage
+        })
+    };
+
     render() {
         const data = this.state.displayedNews;
         let newsTemp;
 
+        const pagesCount = Math.ceil(data.length / this.props.perPage);
+        let startCount = 0;
+
         if (data.length > 0) {
-            newsTemp = data.map((item, index) => (<Article key={ item.id } data={ item } editItem={ this.editItem.bind(null, item) } removeItem={ this.removeItem.bind(null, item) } />))
+            newsTemp = data.map((item, index) => {
+                if (index >= this.state.offset && startCount < this.props.perPage) {
+                    startCount++;
+                    return (
+                        <Article key={ item.id } data={ item } editItem={ this.editItem.bind(null, item) } removeItem={ this.removeItem.bind(null, item) } />
+                        );
+                }
+            })
         } else {
-            newsTemp = <p>Новостей, к сожалению, нет.</p>
+            newsTemp = <p className={ "news__warning" }>Новостей, к сожалению, нет.</p>
         }
         return (
             <div className='news'>
               <Control handleSearch={ this.handleSearch } addItem={ this.addItem } resetStorage={ this.resetStorage } showForm={ this.state.showForm } editedItem={ this.state.editedItem }
-                updateState={ this.updateState } />
+                updateState={ this.updateState } dataLength={ data.length } />
               { newsTemp }
-              <p className={ data.length > 0 ? 'news__counter' : 'noneDisp' }>
+              <ReactPaginate previousLabel={ "«" } nextLabel={ "»" } breakLabel={ <a href="">...</a> } breakClassName={ "pagination__break" } pageCount={ pagesCount }
+                marginPagesDisplayed={ 2 } pageRangeDisplayed={ 5 } onPageChange={ this.handlePageClick } containerClassName={ "pagination" }  pageClassName={ "pagination__item" } pageLinkClassName={ "pagination__link" } previousClassName={"pagination__item"} nextClassName={"pagination__item"} previousLinkClassName={"pagination__link"} nextLinkClassName={"pagination__link"} activeClassName={ "pagination__item--active" } disabledClassName={"pagination__item--disabled"} />
+              {/*<p className={ data.length > 0 ? 'news__counter' : 'noneDisp' }>
                 Всего новостей
                 <strong> { data.length } </strong>
-              </p>
+              </p>*/}
             </div>
         )
     }

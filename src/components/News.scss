@@ -6,4 +6,56 @@
     &__counter {
         text-align: right;
     }
+    &__warning {
+        font: 400 15px/1.4 'Open Sans', sans-serif;
+    }
+}
+
+.pagination {
+    display: inline-block;
+    margin: 20px 0;
+    border-radius: 4px;
+    font-family: 'Open Sans', sans-serif;
+    &__item {
+        display: inline-block;
+    }
+    &__link {
+        display: block;
+        padding: 6px 12px;
+        line-height: 1.4;
+        text-decoration: none;
+        color: #337ab7;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        cursor: pointer;
+    }
+    &__link:hover {
+        color: #23527c;
+        background-color: #eee;
+        border-color: #ddd;
+    }
+    &__link:focus {
+        outline: none;
+    }
+    &__item--active &__link {
+        color: #fff;
+        background-color: #337ab7;
+        border-color: #337ab7;
+        cursor: default;
+    }
+    &__item--disabled &__link {
+        color: #777;
+        background-color: #fff;
+        border-color: #ddd;
+        cursor: default;
+    }
+    &__break {
+        display: block;
+        padding: 6px 12px;
+        line-height: 1.4;
+        text-decoration: none;
+        color: #777;
+        background-color: #fff;
+        border: 1px solid #ddd;
+    }
 }

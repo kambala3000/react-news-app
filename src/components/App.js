@@ -21,7 +21,7 @@ class App extends Component {
     return (
       <div className="app">
         <h3 className='app__header'>News</h3>
-        <News data={ this.state.localData } rawData={ testData } />
+        <News data={ this.state.localData } rawData={ testData } perPage={ 15 } />
       </div>
       );
   }

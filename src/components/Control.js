@@ -22,8 +22,13 @@ class Control extends Component {
             return (
                 <div className='control'>
                   <input type="text" className='control__input' placeholder='Search...' onChange={ this.props.handleSearch } />
-                  <button className='btn btn--add' onClick={ this.handleClick }>Create new</button>
-                  <button className='btn btn--func' onClick={ this.props.resetStorage }>Reset</button>
+                  <div className="control__wrap">
+                    <div className="control__bts-wrap">
+                      <button className='btn btn--add' onClick={ this.handleClick }>Create new</button>
+                      <button className='btn btn--func' onClick={ this.props.resetStorage }>Reset</button>
+                    </div>
+                    <p className="control__counter">Всего новостей <span className="control__counter--bold">{ this.props.length }</span></p>
+                  </div>
                   <Form updateState={ this.props.updateState } addItem={ this.props.addItem } editedItem={ this.props.editedItem } />
                 </div>
                 );
@@ -31,8 +36,13 @@ class Control extends Component {
             return (
                 <div className='control'>
                   <input type="text" className='control__input' placeholder='Search...' onChange={ this.props.handleSearch } />
-                  <button className='btn btn--add' onClick={ this.handleClick }>Create new</button>
-                  <button className='btn btn--func' onClick={ this.props.resetStorage }>Reset</button>
+                  <div className="control__wrap">
+                    <div className="control__bts-wrap">
+                      <button className='btn btn--add' onClick={ this.handleClick }>Create new</button>
+                      <button className='btn btn--func' onClick={ this.props.resetStorage }>Reset</button>
+                    </div>
+                    <p className="control__counter">Всего новостей <span className="control__counter--bold">{ this.props.dataLength }</span></p>
+                  </div>
                 </div>
                 );
         }
