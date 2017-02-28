@@ -27,7 +27,7 @@ class Control extends Component {
                       <button className='btn btn--add' onClick={ this.handleClick }>Create new</button>
                       <button className='btn btn--func' onClick={ this.props.resetStorage }>Reset</button>
                     </div>
-                    <p className="control__counter">Всего новостей <span className="control__counter--bold">{ this.props.length }</span></p>
+                    <p className="control__counter">Всего новостей:&nbsp; <span className="control__counter--bold">{ this.props.dataLength }</span></p>
                   </div>
                   <Form updateState={ this.props.updateState } addItem={ this.props.addItem } editedItem={ this.props.editedItem } />
                 </div>
@@ -41,7 +41,7 @@ class Control extends Component {
                       <button className='btn btn--add' onClick={ this.handleClick }>Create new</button>
                       <button className='btn btn--func' onClick={ this.props.resetStorage }>Reset</button>
                     </div>
-                    <p className="control__counter">Всего новостей <span className="control__counter--bold">{ this.props.dataLength }</span></p>
+                    <p className="control__counter">Всего новостей:&nbsp; <span className="control__counter--bold">{ this.props.dataLength }</span></p>
                   </div>
                 </div>
                 );
