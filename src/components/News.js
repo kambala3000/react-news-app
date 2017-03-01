@@ -115,10 +115,6 @@ class News extends Component {
               { newsTemp }
               <ReactPaginate previousLabel={ "«" } nextLabel={ "»" } breakLabel={ <a href="">...</a> } breakClassName={ "pagination__break" } pageCount={ pagesCount }
                 marginPagesDisplayed={ 2 } pageRangeDisplayed={ 5 } onPageChange={ this.handlePageClick } containerClassName={ "pagination" }  pageClassName={ "pagination__item" } pageLinkClassName={ "pagination__link" } previousClassName={"pagination__item"} nextClassName={"pagination__item"} previousLinkClassName={"pagination__link"} nextLinkClassName={"pagination__link"} activeClassName={ "pagination__item--active" } disabledClassName={"pagination__item--disabled"} />
-              {/*<p className={ data.length > 0 ? 'news__counter' : 'noneDisp' }>
-                Всего новостей
-                <strong> { data.length } </strong>
-              </p>*/}
             </div>
         )
     }
