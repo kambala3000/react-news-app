@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import { serverPort } from './config.json';
 import * as db from './utils/dbUtils';
 
 db.setUpConnection();
@@ -8,28 +9,26 @@ const app = express();
 
 app.use(bodyParser.json());
 
-const port = 8000;
-
-const server = app.listen(port, () => {
-    console.log('We are live on ' + port);
+const server = app.listen(serverPort, () => {
+    console.log(`We are live on ${serverPort}`);
 });
 
-// все статьи
+// all articles
 app.get('/articles', (req, res) => {
     db.listArticles().then(data => res.send(data));
 });
 
-// создать новую
+// create new
 app.post('/articles', (req, res) => {
     db.createArticle(req.body).then(data => res.send(data));
 });
 
-// тут в будущем будет запрос на редактирование
+// edit
+app.put('/articles/:id', (req, res) => {
+    db.updateArticle(req.params.id, req.body).then(data => res.send(data));
+});
 
-// --------------
-
-
-// удаляем
+// delete
 app.delete('/articles/:id', (req, res) => {
     db.deleteArticle(req.params.id).then(data => res.send(data));
 });

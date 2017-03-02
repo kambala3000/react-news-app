@@ -1,20 +1,21 @@
 import mongoose from "mongoose";
 
+import config from '../config.json';
 import '../models/Article';
 
 const Article = mongoose.model('Article');
 
 export function setUpConnection() {
-    mongoose.Promise = global.Promise;
-    mongoose.connect(`mongodb://localhost/articles`);
+    mongoose.Promise = global.Promise; // native promises
+    mongoose.connect(`mongodb://${config.db.host}:${config.db.port}/${config.db.name}`);
 }
 
-// все статьи
+// all articles
 export function listArticles() {
     return Article.find();
 }
 
-// создать новую
+// create new
 export function createArticle(data) {
     const article = new Article({
         id:     Date.now(),
@@ -23,16 +24,22 @@ export function createArticle(data) {
         date:   data.date,
         text:   data.text
     });
-
     return article.save();
 }
 
-// тут в будущем будет запрос на редактирование
+// edit
+export function updateArticle(queryId, data) {
+    const article = {
+        id:     data.id,
+        header: data.header,
+        author: data.author,
+        date:   data.date,
+        text:   data.text
+    };
+    return Article.findOneAndUpdate({ _id: queryId }, article);
+}
 
-// --------------
-
-
-// удаляем
+// delete
 export function deleteArticle(id) {
     return Article.findById(id).remove();
 }
