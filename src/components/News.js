@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import ReactPaginate from 'react-paginate';
 import './News.css';
 
-import Article from './Article'
-import Control from './Control'
+import Article from './Article';
+import Control from './Control';
+
+import api from '../api';
 
 class News extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            displayedNews: this.props.data,
+            displayedNews: this.props.data,            
             showForm: false,
             editedItem: false,
             currentPage: 1,
@@ -23,20 +25,23 @@ class News extends Component {
         this.removeItem = this.removeItem.bind(this);
         this.updateState = this.updateState.bind(this);
         this.handlePageClick = this.handlePageClick.bind(this);
-    }
+    };
 
     handleSearch(e) {
         const searchQuery = e.target.value.toLowerCase();
+        // все таки с пропсов
         const newsArr = this.props.data.filter(function(el) {
             const searchValue = el.header.toLowerCase();
-            return ~searchValue.indexOf(searchQuery);
+            return searchValue.indexOf(searchQuery) !== -1;
         })
-
+        console.log('News:')
+        console.log(newsArr);
         this.setState({
             displayedNews: newsArr
         })
     };
 
+    // не нужен
     resetStorage() {
         localStorage.clear();
         localStorage.setItem('newsArr', JSON.stringify(this.props.rawData));
@@ -44,19 +49,15 @@ class News extends Component {
             displayedNews: this.props.rawData,
         })
     };
+    //--------
 
     addItem(item) {
-        let newsArr = JSON.parse(localStorage.getItem('newsArr')) || this.props.data;
         if (this.state.editedItem) {
-            const idArr = newsArr.map(el => el.id)
-            const itemIndex = idArr.indexOf(item.id);
-            newsArr.splice(itemIndex, 1, item);
+            api.updateArticle(item._id, item);
         } else {
-            newsArr.unshift(item);
+            api.createArticle(item);
         }
-        localStorage.setItem('newsArr', JSON.stringify(newsArr));
         this.setState({
-            displayedNews: newsArr,
             editedItem: false
         });
     };
@@ -69,13 +70,8 @@ class News extends Component {
 
     };
 
-    removeItem(item) {
-        const newsArr = JSON.parse(localStorage.getItem('newsArr')) || this.props.data;
-        const newNewsArr = newsArr.filter(el => el.id !== item.id);
-        localStorage.setItem('newsArr', JSON.stringify(newNewsArr));
-        this.setState({
-            displayedNews: newNewsArr
-        })
+    removeItem(id) {
+        api.deleteArticle(id);
     };
 
     updateState(obj) {
@@ -89,7 +85,22 @@ class News extends Component {
         })
     };
 
+    // componentDidMount() {
+    //     this.setState({
+    //         displayedNews: this.props.data
+    //     });
+    // };
+
+    componentWillReceiveProps(nextProps) {
+         this.setState({
+            displayedNews: nextProps.data
+        });
+    };
+
+    // это работает???!?!
+
     render() {
+        // const data = this.props.data;
         const data = this.state.displayedNews;
         let newsTemp;
 
@@ -101,7 +112,7 @@ class News extends Component {
                 if (index >= this.state.offset && startCount < this.props.perPage) {
                     startCount++;
                     return (
-                        <Article key={ item.id } data={ item } editItem={ this.editItem.bind(null, item) } removeItem={ this.removeItem.bind(null, item) } />
+                        <Article key={ item.id } data={ item } editItem={ this.editItem } removeItem={ this.removeItem } />
                         );
                 }
             })
@@ -114,7 +125,9 @@ class News extends Component {
                 updateState={ this.updateState } dataLength={ data.length } />
               { newsTemp }
               <ReactPaginate previousLabel={ "«" } nextLabel={ "»" } breakLabel={ <a href="">...</a> } breakClassName={ "pagination__break" } pageCount={ pagesCount }
-                marginPagesDisplayed={ 2 } pageRangeDisplayed={ 5 } onPageChange={ this.handlePageClick } containerClassName={ "pagination" }  pageClassName={ "pagination__item" } pageLinkClassName={ "pagination__link" } previousClassName={"pagination__item"} nextClassName={"pagination__item"} previousLinkClassName={"pagination__link"} nextLinkClassName={"pagination__link"} activeClassName={ "pagination__item--active" } disabledClassName={"pagination__item--disabled"} />
+                marginPagesDisplayed={ 2 } pageRangeDisplayed={ 5 } onPageChange={ this.handlePageClick } containerClassName={ "pagination" }
+                pageClassName={ "pagination__item" } pageLinkClassName={ "pagination__link" } previousClassName={ "pagination__item" } nextClassName={ "pagination__item" } previousLinkClassName={ "pagination__link" }
+                nextLinkClassName={ "pagination__link" } activeClassName={ "pagination__item--active" } disabledClassName={ "pagination__item--disabled" } />
             </div>
         )
     }

@@ -39,6 +39,7 @@ class Form extends Component {
         let newsItem;
         if (this.props.editedItem) {
             newsItem = {
+                _id:    this.props.editedItem._id,
                 id:     this.props.editedItem.id,
                 header: elements.formHeader.value,
                 author: elements.formAuthor.value,

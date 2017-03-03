@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Control.css';
 
-import Form from './Form'
+import Form from './Form';
 
 class Control extends Component {
 
