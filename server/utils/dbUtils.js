@@ -10,6 +10,18 @@ export function setUpConnection() {
     mongoose.connect(`mongodb://${config.db.host}:${config.db.port}/${config.db.name}`);
 }
 
+// create date
+function formatDate(date) {
+        let dd = date.getDate();
+        if (dd < 10)
+            dd = '0' + dd;
+        let mm = date.getMonth() + 1;
+        if (mm < 10)
+            mm = '0' + mm;
+        let yy = date.getFullYear();
+        return dd + '.' + mm + '.' + yy;
+    }
+
 // all articles
 export function listArticles() {
     return Article.find();
@@ -18,10 +30,10 @@ export function listArticles() {
 // create new
 export function createArticle(data) {
     const article = new Article({
-        id:     Date.now(),
+        id:     Math.random(),
         header: data.header,
         author: data.author,
-        date:   data.date,
+        date:   formatDate(new Date()),
         text:   data.text
     });
     return article.save();

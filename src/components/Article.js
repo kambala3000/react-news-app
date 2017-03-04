@@ -21,9 +21,9 @@ class Article extends Component {
 
   render() {
     const header = this.props.data.header,
-      author = this.props.data.author,
-      date = this.props.data.date,
-      text = this.props.data.text;
+          author = this.props.data.author,
+          date   = this.props.data.date,
+          text   = this.props.data.text;
 
     return (
       <div className='article'>
@@ -87,8 +87,8 @@ Article.propTypes = {
   data: React.PropTypes.shape({
     header: React.PropTypes.string,
     author: React.PropTypes.string,
-    date: React.PropTypes.string,
-    text: React.PropTypes.string,
+    date:   React.PropTypes.string,
+    text:   React.PropTypes.string,
   })
 };
 

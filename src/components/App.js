@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 
 import News from './News';
-// import testData from '../data/testData';
 import api from '../api';
 
 
@@ -23,8 +22,6 @@ class App extends Component {
   updateData() {
     api.listArticles()
       .then(res => {
-        console.log('App:');
-        console.log(res);
         this.setState({
           localData: res
         });

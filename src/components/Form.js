@@ -6,9 +6,8 @@ class Form extends Component {
     constructor(props) {
         super(props);
         this.closeAround = this.closeAround.bind(this);
-        this.createItem  = this.createItem.bind(this);
-        this.addNews     = this.addNews.bind(this);
-        this.formatDate  = this.formatDate.bind(this);
+        this.createItem = this.createItem.bind(this);
+        this.addNews = this.addNews.bind(this);
     }
 
     componentDidMount() {
@@ -24,17 +23,6 @@ class Form extends Component {
         }
     };
 
-    formatDate(date) {
-        let dd = date.getDate();
-        if (dd < 10)
-            dd = '0' + dd;
-        let mm = date.getMonth() + 1;
-        if (mm < 10)
-            mm = '0' + mm;
-        let yy = date.getFullYear();
-        return dd + '.' + mm + '.' + yy;
-    }
-
     createItem(elements) {
         let newsItem;
         if (this.props.editedItem) {
@@ -48,10 +36,8 @@ class Form extends Component {
             };
         } else {
             newsItem = {
-                id:     Date.now(),
                 header: elements.formHeader.value,
                 author: elements.formAuthor.value,
-                date:   this.formatDate(new Date()),
                 text:   elements.formText.value
             }
         }

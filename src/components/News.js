@@ -5,6 +5,7 @@ import './News.css';
 import Article from './Article';
 import Control from './Control';
 
+import testData from '../data/testData';
 import api from '../api';
 
 class News extends Component {
@@ -19,7 +20,7 @@ class News extends Component {
             offset: 0
         }
         this.handleSearch = this.handleSearch.bind(this);
-        this.resetStorage = this.resetStorage.bind(this);
+        this.uploadTestData = this.uploadTestData.bind(this);
         this.addItem = this.addItem.bind(this);
         this.editItem = this.editItem.bind(this);
         this.removeItem = this.removeItem.bind(this);
@@ -29,35 +30,29 @@ class News extends Component {
 
     handleSearch(e) {
         const searchQuery = e.target.value.toLowerCase();
-        // все таки с пропсов
         const newsArr = this.props.data.filter(function(el) {
             const searchValue = el.header.toLowerCase();
             return searchValue.indexOf(searchQuery) !== -1;
         })
-        console.log('News:')
-        console.log(newsArr);
         this.setState({
             displayedNews: newsArr
         })
     };
 
-    // не нужен
-    resetStorage() {
-        this.props.updateData();
+    uploadTestData() {
+        testData.map((item) => api.createArticle(item).then(() => this.props.updateData()));
     };
-    //--------
 
     addItem(item) {
         if (this.state.editedItem) {
-            api.updateArticle(item._id, item);
+            api.updateArticle(item._id, item).then(() => this.props.updateData());
         } else {
-            api.createArticle(item);
+            api.createArticle(item).then(() => this.props.updateData());
         }
         ;
         this.setState({
             editedItem: false
         });
-        this.props.updateData();
     };
 
     editItem(item) {
@@ -69,14 +64,7 @@ class News extends Component {
     };
 
     removeItem(id) {
-        api.deleteArticle(id);
-        this.props.updateData();
-        // api.listArticles()
-        //     .then(res => {
-        //         console.log('App:');
-        //         console.log(res);
-        //         this.props.setData(res);
-        //     });
+        api.deleteArticle(id).then(() => this.props.updateData());
     };
 
     updateState(obj) {
@@ -95,8 +83,6 @@ class News extends Component {
             displayedNews: nextProps.data
         });
     };
-
-    // это работает???!?!
 
     render() {
         const data = this.state.displayedNews;
@@ -119,7 +105,7 @@ class News extends Component {
         }
         return (
             <div className='news'>
-              <Control handleSearch={ this.handleSearch } addItem={ this.addItem } resetStorage={ this.resetStorage } showForm={ this.state.showForm } editedItem={ this.state.editedItem }
+              <Control handleSearch={ this.handleSearch } addItem={ this.addItem } uploadTestData={ this.uploadTestData } showForm={ this.state.showForm } editedItem={ this.state.editedItem }
                 updateState={ this.updateState } dataLength={ data.length } />
               { newsTemp }
               <ReactPaginate previousLabel={ "«" } nextLabel={ "»" } breakLabel={ <a href="">...</a> } breakClassName={ "pagination__break" } pageCount={ pagesCount }
