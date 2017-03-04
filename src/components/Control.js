@@ -25,7 +25,7 @@ class Control extends Component {
                   <div className="control__wrap">
                     <div className="control__bts-wrap">
                       <button className='btn btn--add' onClick={ this.handleClick }>Create new</button>
-                      <button className='btn btn--func' onClick={ this.props.resetStorage }>Reset</button>
+                      <button className='btn btn--func' onClick={ this.props.resetStorage }>Refresh</button>
                     </div>
                     <p className="control__counter">Всего новостей:&nbsp; <span className="control__counter--bold">{ this.props.dataLength }</span></p>
                   </div>

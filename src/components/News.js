@@ -12,7 +12,7 @@ class News extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            displayedNews: this.props.data,            
+            displayedNews: this.props.data,
             showForm: false,
             editedItem: false,
             currentPage: 1,
@@ -43,11 +43,7 @@ class News extends Component {
 
     // не нужен
     resetStorage() {
-        localStorage.clear();
-        localStorage.setItem('newsArr', JSON.stringify(this.props.rawData));
-        this.setState({
-            displayedNews: this.props.rawData,
-        })
+        this.props.updateData();
     };
     //--------
 
@@ -57,9 +53,11 @@ class News extends Component {
         } else {
             api.createArticle(item);
         }
+        ;
         this.setState({
             editedItem: false
         });
+        this.props.updateData();
     };
 
     editItem(item) {
@@ -72,6 +70,13 @@ class News extends Component {
 
     removeItem(id) {
         api.deleteArticle(id);
+        this.props.updateData();
+        // api.listArticles()
+        //     .then(res => {
+        //         console.log('App:');
+        //         console.log(res);
+        //         this.props.setData(res);
+        //     });
     };
 
     updateState(obj) {
@@ -85,14 +90,8 @@ class News extends Component {
         })
     };
 
-    // componentDidMount() {
-    //     this.setState({
-    //         displayedNews: this.props.data
-    //     });
-    // };
-
     componentWillReceiveProps(nextProps) {
-         this.setState({
+        this.setState({
             displayedNews: nextProps.data
         });
     };
@@ -100,7 +99,6 @@ class News extends Component {
     // это работает???!?!
 
     render() {
-        // const data = this.props.data;
         const data = this.state.displayedNews;
         let newsTemp;
 
