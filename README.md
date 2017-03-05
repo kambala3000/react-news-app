@@ -1,9 +1,9 @@
 # react-news-app
-<h3>Server (in process)</h3>
+<h3>Server</h3>
 <ul>
     <li>NodeJS</li>
     <li>Express</li>
-    <li>MongoDB/PostgreSQL (?)</li>
+    <li>MongoDB</li>
 </ul>
 <h3>Client</h3>
 <ul>

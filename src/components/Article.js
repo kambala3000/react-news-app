@@ -81,7 +81,7 @@ class Article extends Component {
       </div>
       );
   }
-}
+};
 
 Article.propTypes = {
   data: React.PropTypes.shape({

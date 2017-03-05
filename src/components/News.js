@@ -26,6 +26,7 @@ class News extends Component {
         this.removeItem = this.removeItem.bind(this);
         this.updateState = this.updateState.bind(this);
         this.handlePageClick = this.handlePageClick.bind(this);
+        this.checkSearchVal = this.checkSearchVal.bind(this);
     };
 
     handleSearch(e) {
@@ -33,10 +34,10 @@ class News extends Component {
         const newsArr = this.props.data.filter(function(el) {
             const searchValue = el.header.toLowerCase();
             return searchValue.indexOf(searchQuery) !== -1;
-        })
+        });
         this.setState({
             displayedNews: newsArr
-        })
+        });
     };
 
     uploadTestData() {
@@ -84,8 +85,21 @@ class News extends Component {
         });
     };
 
+    checkSearchVal(arr) {
+        if (document.getElementById('search-input')) {
+            const searchInputValue = document.getElementById('search-input').value;
+            const data = arr.filter(el => {
+                const searchValue = el.header.toLowerCase();
+                return searchValue.indexOf(searchInputValue) !== -1;
+            });
+            return data;
+        } else {
+            return arr;
+        }
+    };
+
     render() {
-        const data = this.state.displayedNews;
+        const data = this.checkSearchVal(this.state.displayedNews);
         let newsTemp;
 
         const pagesCount = Math.ceil(data.length / this.props.perPage);
@@ -99,10 +113,11 @@ class News extends Component {
                         <Article key={ item.id } data={ item } editItem={ this.editItem } removeItem={ this.removeItem } />
                         );
                 }
-            })
+            });
         } else {
             newsTemp = <p className={ "news__warning" }>Новостей, к сожалению, нет.</p>
-        }
+        };
+
         return (
             <div className='news'>
               <Control handleSearch={ this.handleSearch } addItem={ this.addItem } uploadTestData={ this.uploadTestData } showForm={ this.state.showForm } editedItem={ this.state.editedItem }
@@ -115,7 +130,7 @@ class News extends Component {
             </div>
         )
     }
-}
+};
 
 News.propTypes = {
     data: React.PropTypes.array

@@ -23,7 +23,7 @@ class App extends Component {
     api.listArticles()
       .then(res => {
         this.setState({
-          localData: res
+          localData: res.reverse()
         });
       });
   };
@@ -36,6 +36,6 @@ class App extends Component {
       </div>
       );
   }
-}
+};
 
 export default App;

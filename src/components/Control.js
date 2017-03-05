@@ -8,7 +8,7 @@ class Control extends Component {
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
-    }
+    };
 
     handleClick() {
         this.props.updateState({
@@ -21,7 +21,7 @@ class Control extends Component {
         if (this.props.showForm) {
             return (
                 <div className='control'>
-                  <input type="text" className='control__input' placeholder='Search...' onChange={ this.props.handleSearch } />
+                  <input type="text" className='control__input' id="search-input" placeholder='Search...' onChange={ this.props.handleSearch } />
                   <div className="control__wrap">
                     <div className="control__bts-wrap">
                       <button className='btn btn--add' onClick={ this.handleClick }>Create new</button>
@@ -35,7 +35,7 @@ class Control extends Component {
         } else {
             return (
                 <div className='control'>
-                  <input type="text" className='control__input' placeholder='Search...' onChange={ this.props.handleSearch } />
+                  <input type="text" className='control__input' id="search-input" placeholder='Search...' onChange={ this.props.handleSearch } />
                   <div className="control__wrap">
                     <div className="control__bts-wrap">
                       <button className='btn btn--add' onClick={ this.handleClick }>Create new</button>
@@ -48,6 +48,6 @@ class Control extends Component {
         }
 
     }
-}
+};
 
 export default Control;

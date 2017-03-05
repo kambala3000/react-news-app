@@ -19,4 +19,4 @@ export default {
     deleteArticle(id) {
         return axios.delete(`${apiPrefix}/articles/${id}`);
     }
-}
+};
