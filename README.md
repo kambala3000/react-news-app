@@ -10,3 +10,5 @@
     <li>React</li>
     <li>Redux/Flux (?)</li>
 </ul>
+
+<img src="preview.jpg" alt="React News App"></a>
