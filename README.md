@@ -10,5 +10,12 @@
     <li>React</li>
     <li>Redux/Flux (?)</li>
 </ul>
+<h3>Commands</h3>
+<p>To run app:</p>
+<pre><code>npm start</code></pre>
+<p>To run API-server:</p>
+<pre><code>npm run server</code></pre>
+<p>Server config: <code>server/config.json</code></p>
+<p>Required MongoDB</p>
 
-<img src="preview.jpg" alt="React News App"></a>
+<center><img src="preview.jpg" alt="React News App"></center>
