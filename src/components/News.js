@@ -14,6 +14,7 @@ class News extends Component {
         super(props);
         this.state = {
             displayedNews: this.props.data,
+            inputValue: '',
             showForm: false,
             editedItem: false,
             currentPage: 1,
@@ -30,12 +31,13 @@ class News extends Component {
     };
 
     handleSearch(e) {
-        const searchQuery = e.target.value.toLowerCase();
-        const newsArr = this.props.data.filter(function(el) {
-            const searchValue = el.header.toLowerCase();
-            return searchValue.indexOf(searchQuery) !== -1;
+        const searchQuery = e.target.value.toLowerCase();  
+        const newsArr = this.props.data.filter(el => {
+            const itemHeader = el.header.toLowerCase();
+            return itemHeader.indexOf(searchQuery) !== -1;
         });
         this.setState({
+            inputValue: searchQuery,
             displayedNews: newsArr
         });
     };
@@ -50,7 +52,6 @@ class News extends Component {
         } else {
             api.createArticle(item).then(() => this.props.updateData());
         }
-        ;
         this.setState({
             editedItem: false
         });
@@ -85,16 +86,15 @@ class News extends Component {
         });
     };
 
-    checkSearchVal(arr) {
-        if (document.getElementById('search-input')) {
-            const searchInputValue = document.getElementById('search-input').value;
-            const data = arr.filter(el => {
-                const searchValue = el.header.toLowerCase();
-                return searchValue.indexOf(searchInputValue) !== -1;
+    checkSearchVal(data) {
+        if (this.state.inputValue !== '') {
+            const filteredData = data.filter(el => {
+                const itemHeader = el.header.toLowerCase();
+                return itemHeader.indexOf(this.state.inputValue) !== -1;
             });
-            return data;
+            return filteredData;
         } else {
-            return arr;
+            return data;
         }
     };
 

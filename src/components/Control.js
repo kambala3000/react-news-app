@@ -14,14 +14,14 @@ class Control extends Component {
         this.props.updateState({
             showForm: !this.props.showForm,
             editedItem: false
-        })
+        });
     };
 
     render() {
         if (this.props.showForm) {
             return (
                 <div className='control'>
-                  <input type="text" className='control__input' id="search-input" placeholder='Search...' onChange={ this.props.handleSearch } />
+                  <input type="text" className='control__input' name="searchInput" placeholder='Search...' onChange={ this.props.handleSearch } />
                   <div className="control__wrap">
                     <div className="control__bts-wrap">
                       <button className='btn btn--add' onClick={ this.handleClick }>Create new</button>
@@ -35,7 +35,7 @@ class Control extends Component {
         } else {
             return (
                 <div className='control'>
-                  <input type="text" className='control__input' id="search-input" placeholder='Search...' onChange={ this.props.handleSearch } />
+                  <input type="text" className='control__input' name="searchInput" placeholder='Search...' onChange={ this.props.handleSearch } />
                   <div className="control__wrap">
                     <div className="control__bts-wrap">
                       <button className='btn btn--add' onClick={ this.handleClick }>Create new</button>
