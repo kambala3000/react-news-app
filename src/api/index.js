@@ -4,8 +4,7 @@ import { apiPrefix } from '../../server/config.json';
 
 export default {
     listArticles() {
-        return axios.get(`${apiPrefix}/articles`)
-        .then(response => response.data);
+        return axios.get(`${apiPrefix}/articles`).then(response => response.data);
     },
 
     createArticle(data) {

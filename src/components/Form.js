@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './Form.css';
 
-
 class Form extends Component {
     constructor(props) {
         super(props);
@@ -9,20 +8,20 @@ class Form extends Component {
         this.createItem = this.createItem.bind(this);
         this.addNews = this.addNews.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
-    };
+    }
 
     componentDidMount() {
         this.refs.modal.elements.formHeader.focus();
-    };
+    }
 
     closeAround(e) {
         const target = e.target;
         if (target === e.currentTarget) {
             this.props.updateState({
                 showForm: false
-            })
+            });
         }
-    };
+    }
 
     createItem(elements) {
         let newsItem;
@@ -40,10 +39,10 @@ class Form extends Component {
                 header: elements.formHeader.value,
                 author: elements.formAuthor.value,
                 text: elements.formText.value
-            }
+            };
         }
         this.props.addItem(newsItem);
-    };
+    }
 
     addNews(e) {
         const form = e.currentTarget;
@@ -52,42 +51,67 @@ class Form extends Component {
         e.stopPropagation();
         this.props.updateState({
             showForm: false
-        })
-    };
+        });
+    }
 
     onKeyDown(e) {
         if (e.keyCode === 13 && e.target.name !== 'formText') {
             e.preventDefault();
-        };
+        }
         if (e.keyCode === 27) {
             this.props.updateState({
                 showForm: false
-            })
+            });
         }
-    };
+    }
 
     render() {
-
         return (
-            <div className='modal' onClick={ this.closeAround }>
-              <form className='modal__from' ref='modal' onSubmit={ this.addNews }>
-                <div className="modal__form-group">
-                  <input name='formHeader' type="text" className="modal__input" placeholder='Header' defaultValue={ this.props.editedItem.header } onKeyDown={ this.onKeyDown } required />
-                </div>
-                <div className="modal__form-group">
-                  <input name='formAuthor' type="text" className="modal__input" placeholder='Author' defaultValue={ this.props.editedItem.author } onKeyDown={ this.onKeyDown } required />
-                </div>
-                <div className="modal__form-group">
-                  <textarea name='formText' className="modal__input modal__input--textarea" rows='3' placeholder='Your text...' defaultValue={ this.props.editedItem.text } onKeyDown={ this.onKeyDown } required />
-                </div>
-                <div className="modal__btns-wrap">
-                  <button className='btn btn--cancel modal__btn' onClick={ this.closeAround }>Cancel</button>
-                  <button className='btn btn--add modal__btn' type='submit'>Okay</button>
-                </div>
-              </form>
+            <div className="modal" onClick={this.closeAround}>
+                <form className="modal__from" ref="modal" onSubmit={this.addNews}>
+                    <div className="modal__form-group">
+                        <input
+                            name="formHeader"
+                            type="text"
+                            className="modal__input"
+                            placeholder="Header"
+                            defaultValue={this.props.editedItem.header}
+                            onKeyDown={this.onKeyDown}
+                            required
+                        />
+                    </div>
+                    <div className="modal__form-group">
+                        <input
+                            name="formAuthor"
+                            type="text"
+                            className="modal__input"
+                            placeholder="Author"
+                            defaultValue={this.props.editedItem.author}
+                            onKeyDown={this.onKeyDown}
+                            required
+                        />
+                    </div>
+                    <div className="modal__form-group">
+                        <textarea
+                            name="formText"
+                            className="modal__input modal__input--textarea"
+                            rows="3"
+                            placeholder="Your text..."
+                            defaultValue={this.props.editedItem.text}
+                            onKeyDown={this.onKeyDown}
+                            required
+                        />
+                    </div>
+                    <div className="modal__btns-wrap">
+                        <button className="btn btn--cancel modal__btn" onClick={this.closeAround}>
+                            Cancel
+                        </button>
+                        <button className="btn btn--add modal__btn" type="submit">Okay</button>
+                    </div>
+                </form>
             </div>
-        )
+        );
     }
-};
+}
 
 export default Form;
